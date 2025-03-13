@@ -1,10 +1,14 @@
 import express, { Application } from 'express';
-import routes from '@routes/task.routes';
+import cors from 'cors';
+
+import { router } from '@routes/index'
 
 const app:Application = express();
 
 app.use(express.json());
 
-app.use('/api/v1', routes())
+app.use(cors());
+
+app.use(router)
 
 export default app;
