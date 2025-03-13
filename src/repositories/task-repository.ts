@@ -49,7 +49,11 @@ export class TaskRepository implements ITaskRepository {
    async findAll(): Promise<Response<Task[]>> {
       try {
          const snapshot = await getDocs(this.taskCollection);
-         const tasksDB = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Task));
+         const tasksDB = snapshot.docs.map(doc => {
+            const { userId, createdAt, ...taskData } = doc.data();
+            const formattedCreatedAt = createdAt.toDate();
+            return { id: doc.id, createdAt: formattedCreatedAt, ...taskData } as Task
+         });
 
          return {
             ok:true,
