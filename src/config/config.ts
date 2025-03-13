@@ -3,6 +3,7 @@ dotenv.config();
 
 const {
   PORT,
+  FRONTEND_URL,
   API_KEY,
   AUTH_DOMAIN,
   PROJECT_ID,
@@ -15,6 +16,7 @@ const {
 
 export default {
   port: PORT,
+  frontEndUrl: FRONTEND_URL,
   firebaseConfig: {
     apiKey: API_KEY,
     authDomain: AUTH_DOMAIN,
