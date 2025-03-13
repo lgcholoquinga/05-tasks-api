@@ -11,12 +11,10 @@ import {
    getDocs,
    updateDoc,
    deleteDoc,
-   FirestoreError,
  } from 'firebase/firestore';
 import { Response } from "types/response.interface";
 
 export class TaskRepository implements ITaskRepository {
-  
    private db = getFirestore(firebase);
    private taskCollection = collection(this.db, 'tasks');
 
