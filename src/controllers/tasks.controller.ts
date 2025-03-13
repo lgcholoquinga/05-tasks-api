@@ -14,13 +14,19 @@ const getAllTasks = async(_req:Request, res:Response) => {
    res.json(response);
 }
 
+const getAllTasksByUser = async(req:Request, res:Response) => {
+   const response = await taskService.findAllTasksByUser(req.params.id)
+   res.json(response);
+}
+
 const getTaskById = async(req:Request, res:Response) => {
    const response = await taskService.findOneTask(req.params.id);
    res.json(response);
 }
 
-const createTask = async({ body }:Request, res:Response) => {
-   const response = await taskService.createTask(body);
+const createTask = async(req:Request, res:Response) => {
+   const userId = req.headers.email;
+   const response = await taskService.createTask(req.body);
    res.json(response);
 }
 
@@ -39,5 +45,6 @@ export {
    createTask,
    updateTask,
    deleteTask,
-   getTaskById
+   getTaskById,
+   getAllTasksByUser
 }

@@ -6,6 +6,8 @@ export interface ITaskService {
 
    findAllTasks(): Promise<Response<Task[]>>;
 
+   findAllTasksByUser(id:string): Promise<Response<Task[]>>;
+
    findOneTask(id:string): Promise<Response<Task | null>>;
 
    updateTask(id:string,data: Partial<Task> ): Promise<Response<Boolean>>;

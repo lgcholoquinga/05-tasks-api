@@ -11,15 +11,29 @@ import {
    getDocs,
    updateDoc,
    deleteDoc,
+   query,
+   where,
  } from 'firebase/firestore';
 import { Response } from "types/response.interface";
 
 export class TaskRepository implements ITaskRepository {
    private db = getFirestore(firebase);
    private taskCollection = collection(this.db, 'tasks');
+   private userCollection = collection(this.db, 'users');
 
    async create(data: Task): Promise<Response<Task>> {
       try {
+         const existUser = await this.findUserByEmail(data.userId);
+
+         if(!existUser) {
+            return {
+               ok: false,
+               message: `There is no user with email: ${data.userId}`
+            }
+         }
+
+         data.createdAt = new Date();
+         data.completed = false;
          const docRef = await addDoc(this.taskCollection, data);
          return {
             ok:true,
@@ -43,6 +57,26 @@ export class TaskRepository implements ITaskRepository {
          }
       } catch (error) {
          return this.handleError();
+      }
+   }
+
+   async findAllById(id: string): Promise<Response<Task[]>> {
+
+      const q = query(this.taskCollection, where('userId', '==', id));
+      const querySnapshot = await getDocs(q);
+
+      const tasksDoc = querySnapshot.docs;
+      const taskDB: Task[] = [];
+
+      tasksDoc.forEach((doc) => {
+         const { userId, createdAt, ...taskData } = doc.data();
+         const formattedCreatedAt = createdAt.toDate();
+         taskDB.push({ id: doc.id, createdAt: formattedCreatedAt, ...taskData } as Task);
+      });
+
+      return {
+         ok: true,
+         data: taskDB,
       }
    }
 
@@ -97,6 +131,21 @@ export class TaskRepository implements ITaskRepository {
          ok:true,
          message: 'Task deleted successfully.'
       }
+   }
+
+   private async findUserByEmail(email: string): Promise<boolean> {
+      try {
+         const q = query(this.userCollection, where('email', '==', email));
+         const querySnapshot = await getDocs(q);
+
+         if (querySnapshot.empty) {
+            return false;
+         }
+
+         return true;
+      } catch {
+         return false;
+      }   
    }
 
    private handleError() {

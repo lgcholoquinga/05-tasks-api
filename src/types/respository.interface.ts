@@ -10,4 +10,6 @@ export interface Repository<T = unknown> {
    update(id: string, data:Partial<T>): Promise<Response<Boolean>>;
 
    delete(id:string): Promise<Response<Boolean>>;
+
+   findAllById(id:string): Promise<Response<T[]>>;
 }

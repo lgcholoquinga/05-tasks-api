@@ -11,6 +11,10 @@ export class TaskService implements ITaskService {
       this.taskRepository = taskRepository;
    }
 
+   findAllTasksByUser(id: string): Promise<Response<Task[]>> {
+      return this.taskRepository.findAllById(id);
+   }
+
    async createTask(task: Task): Promise<Response<Task>> {
       return this.taskRepository.create(task);
    }

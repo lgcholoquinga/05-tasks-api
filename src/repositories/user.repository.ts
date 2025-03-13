@@ -61,6 +61,10 @@ export class UserRepository implements IUserRepository {
       throw new Error("Method not implemented.");
    }
 
+   findAllById(id: string): Promise<Response<User[]>> {
+      throw new Error("Method not implemented.");
+   }
+
    update(id: string, data: Partial<User>): Promise<Response<Boolean>> {
       throw new Error("Method not implemented.");
    }
