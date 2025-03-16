@@ -1,5 +1,6 @@
-import { UserRepository } from "@repositories/user.repository";
-import { UserService } from "@services/user.service";
+import { UserRepository } from "../repositories/user.repository";
+import { UserService } from "../services/user.service";
+
 import { Request, Response } from "express";
 import { IUserRepository } from "types/users/iuser.repository";
 import { IUserService } from "types/users/iuser.service";

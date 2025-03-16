@@ -2,7 +2,7 @@ import { Response } from "types/response.interface";
 import { IUserRepository } from "types/users/iuser.repository";
 import { User } from "types/users/user.interface";
 
-import firebase from "@config/firebase";
+import firebase from "../config/firebase";
 import {
    getFirestore,
    collection,

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import { TaskRepository } from "@repositories/task-repository";
-import { TaskService } from "@services/task.service";
+import { TaskRepository } from "../repositories/task-repository";
+import { TaskService } from "../services/task.service";
 
 import { ITaskRepository } from "types/tasks/itask.repository";
 import { ITaskService } from "types/tasks/itask.service";

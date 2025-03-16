@@ -1,4 +1,4 @@
-import { create, findOne } from '@controllers/users.controller'
+import { create, findOne } from '../controllers/users.controller';
 import { Router } from 'express'
 
 const router = Router()

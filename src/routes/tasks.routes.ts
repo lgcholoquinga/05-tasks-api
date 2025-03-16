@@ -1,5 +1,5 @@
 
-import { createTask, deleteTask, getAllTasks, getAllTasksByUser, getTaskById, updateTask } from '@controllers/index'
+import { createTask, deleteTask, getAllTasks, getAllTasksByUser, getTaskById, updateTask } from '../controllers/tasks.controller';
 import { Router } from 'express'
 
 const router = Router()

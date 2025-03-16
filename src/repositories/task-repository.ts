@@ -1,7 +1,7 @@
 import { ITaskRepository } from "types/tasks/itask.repository";
 import { Task } from "types/tasks/task.interface";
 
-import firebase from "@config/firebase";
+import firebase from "../config/firebase";
 import {
    getFirestore,
    collection,
